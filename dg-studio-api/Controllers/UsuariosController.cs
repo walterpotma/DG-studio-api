@@ -16,6 +16,7 @@ namespace dg_studio_api.Controllers
         }
 
         [HttpPost]
+        [Route("AddUsuarios")]
         public IActionResult AddNewUsuario(UsuariosViewModel usuariosView)
         {
             var usuarios = new Usuarios(usuariosView.nome, usuariosView.email, usuariosView.senha, usuariosView.categoria);
@@ -23,6 +24,7 @@ namespace dg_studio_api.Controllers
             return Ok();
         }
         [HttpGet]
+        [Route("ListarUsuarios")]
         public IActionResult ListarUsuarios()
         {
             var usuarioss = _usuariosRepository.Get();

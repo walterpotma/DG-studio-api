@@ -8,6 +8,8 @@ namespace dg_studio_api.Infraestrutura
         public DbSet<Usuarios> Usuarios { get; set; }
         public DbSet<Cache> Cache { get; set; }
 
+        public ConnectionContext(DbContextOptions<ConnectionContext> options) : base(options) { }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

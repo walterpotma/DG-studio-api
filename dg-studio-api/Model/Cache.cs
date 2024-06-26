@@ -7,14 +7,14 @@ namespace dg_studio_api.Model
     public class Cache
     {
         [Key]
-        public int cachekey { get; set; }
-        public string userid { get; private set; }
-        public string reqtype { get; private set; }
-        public string cachevalue { get; private set; }
+        public int id { get; set; }
+        public string? userid { get; private set; }
+        public string? reqtype { get; private set; }
+        public string? cachevalue { get; private set; }
         public DateTime expirationtime { get; private set; }
         public Cache( int id, string userid, string reqtype, string cachevalue, DateTime expirationtime)
         {
-            this.cachekey = id;
+            this.id = id;
             this.userid = userid;
             this.reqtype = reqtype;
             this.cachevalue = cachevalue;

@@ -1,11 +1,17 @@
-﻿using dg_studio_api.Infraestrutura;
-using dg_studio_api.Model;
+﻿using dg_studio_api.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace dg_studio_api.Infraestrutura
 {
     public class CacheRepository : ICacheRepository
     {
-        private readonly ConnectionContext _context = new ConnectionContext();
+        private readonly ConnectionContext _context;
+
+        public CacheRepository(ConnectionContext context)
+        {
+            _context = context;
+        }
+
         public void Add(Cache cache)
         {
             _context.Cache.Add(cache);
@@ -19,8 +25,12 @@ namespace dg_studio_api.Infraestrutura
 
         public void Update(Cache cache)
         {
-            _context.Cache.Update(cache);
-            _context.SaveChanges();
+            var existingCache = _context.Cache.Find(cache.id);
+            if (existingCache != null)
+            {
+                _context.Entry(existingCache).CurrentValues.SetValues(cache);
+                _context.SaveChanges();
+            }
         }
     }
 }

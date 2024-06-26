@@ -16,6 +16,7 @@ namespace dg_studio_api.Controllers
         }
 
         [HttpPost]
+        [Route("AdicionarCache")]
         public IActionResult AddCache([FromBody] Cache cache)
         {
             _cacheRepository.Add(cache);
@@ -23,16 +24,17 @@ namespace dg_studio_api.Controllers
         }
 
         [HttpGet]
+        [Route("BuscarCache")]
         public ActionResult<List<Cache>> GetCache()
         {
             var caches = _cacheRepository.Get();
             return Ok(caches);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("EditarCache/{id}")]
         public IActionResult UpdateCache(int id, [FromBody] Cache updatedCache)
         {
-            var existingCache = _cacheRepository.Get().FirstOrDefault(c => c.cachekey == id);
+            var existingCache = _cacheRepository.Get().FirstOrDefault(c => c.id == id);
             if (existingCache == null)
             {
                 return NotFound();
