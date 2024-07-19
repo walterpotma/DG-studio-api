@@ -3,6 +3,6 @@
     public interface IUsuariosRepository
     {
         void Add(Usuarios usuarios);
-        List<Usuarios> Get();    
+        List<Usuarios> Get();
     }
 }
