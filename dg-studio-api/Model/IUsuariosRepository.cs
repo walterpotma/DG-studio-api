@@ -3,6 +3,7 @@
     public interface IUsuariosRepository
     {
         void Add(Usuarios usuarios);
-        List<Usuarios> Get();    
+        List<Usuarios> Get();
+        Task<Usuarios> Login(int id, string email, string senha);
     }
 }
