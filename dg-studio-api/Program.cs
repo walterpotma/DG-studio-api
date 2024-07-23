@@ -44,6 +44,21 @@ builder.Services.AddAuthentication(x =>
         ValidateAudience = true,
     };
 });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Master", policy =>
+        policy.RequireClaim("Categoria", "MASTER"));
+    options.AddPolicy("Produtora", policy =>
+        policy.RequireAssertion(context =>
+            context.User.HasClaim(c => c.Type == "Categoria" && (c.Value == "MASTER" || c.Value == "scan"))));
+    options.AddPolicy("Artista", policy =>
+        policy.RequireAssertion(context =>
+            context.User.HasClaim(c => c.Type == "Categoria" && (c.Value == "MASTER" || c.Value == "autor" ))));
+    options.AddPolicy("User", policy =>
+        policy.RequireAssertion(context =>
+            context.User.HasClaim(c => c.Type == "Categoria" && (c.Value == "MASTER" || c.Value == "scan" || c.Value == "autor" || c.Value == "leitor"))));
+});
+
 
 var app = builder.Build();
 

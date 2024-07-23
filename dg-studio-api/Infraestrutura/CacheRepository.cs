@@ -12,25 +12,30 @@ namespace dg_studio_api.Infraestrutura
             _context = context;
         }
 
-        public void Add(Cache cache)
-        {
-            _context.Cache.Add(cache);
-            _context.SaveChanges();
-        }
-
-        public List<Cache> Get()
-        {
-            return _context.Cache.ToList();
-        }
-
-        public void Update(Cache cache)
-        {
-            var existingCache = _context.Cache.Find(cache.id);
-            if (existingCache != null)
+        public async Task AddTokenAsync(int userId, string type, string value)
+        {      
+            var existe = await _context.Cache.FirstOrDefaultAsync(x => x.userid == userId && x.type == type);
+            if (existe != null)
             {
-                _context.Entry(existingCache).CurrentValues.SetValues(cache);
-                _context.SaveChanges();
+                existe.value = value;
+                _context.Cache.Update(existe);
             }
+            else
+            {
+                var cache = new Cache
+                {
+                    userid = userId,
+                    type = type,
+                    value = value
+                };
+                _context.Cache.Add(cache);
+            }
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Cache> GetCacheById(int id)
+        {
+            return await _context.Cache.FindAsync(id);
         }
     }
 }

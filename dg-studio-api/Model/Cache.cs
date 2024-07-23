@@ -8,17 +8,15 @@ namespace dg_studio_api.Model
     {
         [Key]
         public int id { get; set; }
-        public string? userid { get; private set; }
-        public string? reqtype { get; private set; }
-        public string? cachevalue { get; private set; }
-        public DateTime expirationtime { get; private set; }
-        public Cache( int id, string userid, string reqtype, string cachevalue, DateTime expirationtime)
-        {
-            this.id = id;
-            this.userid = userid;
-            this.reqtype = reqtype;
-            this.cachevalue = cachevalue;
-            this.expirationtime = expirationtime;
-        }
+
+        [Required]
+        public int userid { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string type { get; set; } // Tipo do token, por exemplo, "access" ou "refresh"
+
+        [Required]
+        public string value { get; set; } // Valor do token
     }
 }

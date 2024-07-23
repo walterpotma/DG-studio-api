@@ -14,35 +14,18 @@ namespace dg_studio_api.Controllers
         {
             _cacheRepository = cacheRepository;
         }
-
-        [HttpPost]
-        [Route("AdicionarCache")]
-        public IActionResult AddCache([FromBody] Cache cache)
-        {
-            _cacheRepository.Add(cache);
-            return Ok();
-        }
-
+        
+        
         [HttpGet]
-        [Route("BuscarCache")]
-        public ActionResult<List<Cache>> GetCache()
+        [Route("ListarPorId/{id}")]
+        public async Task<IActionResult> GetCacheById(int id)
         {
-            var caches = _cacheRepository.Get();
-            return Ok(caches);
-        }
-
-        [HttpPut("EditarCache/{id}")]
-        public IActionResult UpdateCache(int id, [FromBody] Cache updatedCache)
-        {
-            var existingCache = _cacheRepository.Get().FirstOrDefault(c => c.id == id);
-            if (existingCache == null)
+            var cache = await _cacheRepository.GetCacheById(id);
+            if (cache == null)
             {
                 return NotFound();
             }
-
-            existingCache = new Cache(id, updatedCache.userid, updatedCache.reqtype, updatedCache.cachevalue, updatedCache.expirationtime);
-            _cacheRepository.Update(existingCache);
-            return Ok();
+            return Ok(cache);
         }
     }
 }

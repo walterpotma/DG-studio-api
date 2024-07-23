@@ -4,5 +4,6 @@
     {
         void Add(Usuarios usuarios);
         List<Usuarios> Get();
+        Task<Usuarios> Login(int id, string email, string senha);
     }
 }

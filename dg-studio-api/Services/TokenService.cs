@@ -17,6 +17,7 @@ namespace dg_studio_api.Services
                 Subject = new System.Security.Claims.ClaimsIdentity(new Claim[]
                 {
                     new Claim("userId", usuario.id.ToString()),
+                    new Claim("Categoria", usuario.categoria.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(
@@ -24,8 +25,7 @@ namespace dg_studio_api.Services
             };
             var tokenHandler = new JwtSecurityTokenHandler();
             var token =  tokenHandler.CreateToken(tokenConfig);
-            var tokenString = tokenHandler.WriteToken(token);
-            return new { tokenString };
+            return tokenHandler.WriteToken(token);
         }
     }
 }
