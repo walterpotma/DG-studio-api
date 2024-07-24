@@ -27,5 +27,36 @@ namespace dg_studio_api.Services
             var token =  tokenHandler.CreateToken(tokenConfig);
             return tokenHandler.WriteToken(token);
         }
+        public static int? ReadJWT(string token)
+        {
+            var key = Encoding.ASCII.GetBytes(Key.Secret);
+            var handler = new JwtSecurityTokenHandler();
+            var validations = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false
+            };
+
+            try
+            {
+                var claims = handler.ValidateToken(token, validations, out var tokenSecure);
+
+                // Extraindo o claim 'userId' e convertendo para int
+                var userIdClaim = claims.FindFirst("userId");
+                if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
+                {
+                    return userId;
+                }
+            }
+            catch
+            {
+                return 404;
+            }
+
+            return null; // Retorna null se o token não for válido ou o ID não puder ser extraído
+        }
+
     }
 }

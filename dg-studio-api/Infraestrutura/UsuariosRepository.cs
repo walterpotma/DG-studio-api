@@ -35,5 +35,24 @@ namespace dg_studio_api.Infraestrutura
         {
             return await _context.Usuarios.FirstOrDefaultAsync(x => x.email == email && x.senha == senha);
         }
+
+        public async Task<Usuarios> BuscarPorTokenJWT(string token)
+        {
+            // Valida o token e obtém o ID do usuário
+            var userId = TokenService.ReadJWT(token);
+
+            if (userId == null)
+            {
+                // Se o ID estiver nulo, o token pode ser inválido ou não conter um ID válido
+                throw new ArgumentException("Token inválido ou não contém um ID válido.");
+            }
+
+            // Busca o usuário no banco de dados pelo ID
+            var busca = await _context.Usuarios.FirstOrDefaultAsync(x => x.id == userId.Value);
+
+            // Retorna o usuário encontrado ou null se não encontrado
+            return busca;
+        }
+
     }
 }
