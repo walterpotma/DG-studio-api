@@ -2,7 +2,7 @@
 {
     public interface ICacheRepository
     {
-        Task AddTokenAsync(int userId, string type, string valor);
+        Task AddTokenAsync(int userId, string type, string value);
         Task<Cache> GetCacheById(int id);
     }
 }

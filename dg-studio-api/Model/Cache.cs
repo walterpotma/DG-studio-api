@@ -17,6 +17,6 @@ namespace dg_studio_api.Model
         public string type { get; set; } // Tipo do token, por exemplo, "access" ou "refresh"
 
         [Required]
-        public string valor { get; set; } // Valor do token
+        public string value { get; set; } // Valor do token
     }
 }

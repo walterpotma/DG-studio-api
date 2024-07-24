@@ -2,7 +2,6 @@
 using dg_studio_api.Model;
 using dg_studio_api.Services;
 using dg_studio_api.ViewModel;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -52,20 +51,6 @@ namespace dg_studio_api.Controllers
             }
 
             return Unauthorized("Email e/ou senha incorretos");
-        }
-
-        [HttpGet]
-        [Route("BuscarPorTokenJWT/{token}")]
-        public async Task<IActionResult> BuscarPorTokenJWT(string token)
-        {
-            var Perfil = await _usuariosRepository.BuscarPorTokenJWT(token);
-
-            if (Perfil == null)
-            {
-                return NotFound($"Perfil não encontrado");
-            }
-
-            return Ok(Perfil);
         }
     }
 }

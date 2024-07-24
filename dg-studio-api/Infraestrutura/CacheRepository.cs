@@ -12,13 +12,13 @@ namespace dg_studio_api.Infraestrutura
             _context = context;
         }
 
-        public async Task AddTokenAsync(int userId, string type, string valor)
+        public async Task AddTokenAsync(int userId, string type, string value)
         {      
             var existe = await _context.Cache.FirstOrDefaultAsync(x => x.userid == userId && x.type == type);
             if (existe != null)
             {
-                existe.valor = valor;
-                _context.Cache.Update(existe);  
+                existe.value = value;
+                _context.Cache.Update(existe);
             }
             else
             {
@@ -26,7 +26,7 @@ namespace dg_studio_api.Infraestrutura
                 {
                     userid = userId,
                     type = type,
-                    valor = valor
+                    value = value
                 };
                 _context.Cache.Add(cache);
             }
