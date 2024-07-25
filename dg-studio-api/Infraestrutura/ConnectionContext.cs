@@ -14,7 +14,7 @@ namespace dg_studio_api.Infraestrutura
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=Dgstudio;User Id=postgres;Password=Wa2157@@");
+                optionsBuilder.UseNpgsql("Host=ep-shrill-smoke-a4eb74ri.us-east-1.aws.neon.tech;Port=5432;Database=verceldb;Username=default;Password=GapgWPN2hL4i;SslMode=Require");
             }
         }
     }
