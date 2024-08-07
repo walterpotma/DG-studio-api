@@ -2,6 +2,8 @@
 {
     public interface ICapitulosRepository
     {
-
+        Task AddCapituloAsync(Capitulos cap);
+        Task<Capitulos> GetCapituloByIdAsync(int id);
+        List<Capitulos> Get();
     }
 }

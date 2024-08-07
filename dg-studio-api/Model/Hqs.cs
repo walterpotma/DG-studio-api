@@ -20,5 +20,9 @@ namespace dg_studio_api.Model
 
         [Required]
         public string autor { get; set; }
+
+        public string descricao { get; set; }
+
+        public string generos { get; set; }
     }
 }

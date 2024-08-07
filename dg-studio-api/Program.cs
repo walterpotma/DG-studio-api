@@ -26,6 +26,9 @@ builder.Services.AddDbContext<ConnectionContext>(options =>
 
 builder.Services.AddTransient<IUsuariosRepository, UsuariosRepository>();
 builder.Services.AddTransient<ICacheRepository, CacheRepository>();
+builder.Services.AddTransient<IHqsRepository, HqsRepository>();
+builder.Services.AddTransient<ICapitulosRepository, CapitulosRepository>();
+builder.Services.AddTransient<IPaginasRepository, PaginasRepository>();
 
 var key = Encoding.ASCII.GetBytes(dg_studio_api.Key.Secret);
 builder.Services.AddAuthentication(x =>

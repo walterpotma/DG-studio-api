@@ -10,10 +10,14 @@ namespace dg_studio_api.Infraestrutura
         {
             _context = context;
         }
-        public void Add(Hqs hqs)
+        public async Task AddHqAsync(Hqs hq)
         {
-            _context.Hqs.Add(hqs);
-            _context.SaveChanges();
+            _context.Hqs.Add(hq);
+            await _context.SaveChangesAsync();
+        }
+        public List<Hqs> Get()
+        {
+            return _context.Hqs.ToList();
         }
     }
 }

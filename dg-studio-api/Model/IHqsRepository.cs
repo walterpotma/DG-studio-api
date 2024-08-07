@@ -2,6 +2,7 @@
 {
     public interface IHqsRepository
     {
-        void Add(Hqs hqs);
+        Task AddHqAsync(Hqs hq);
+        List<Hqs> Get();
     }
 }
