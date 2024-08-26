@@ -13,7 +13,12 @@ builder.Services.AddCors(options => {
     options.AddPolicy(name: "MyPolicy",
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod();
+            policy.WithOrigins(
+                "https://dg-studio-next.vercel.app",
+                "http://localhost:3000" // Adicione outros sites aqui
+            )
+            .AllowAnyHeader()
+            .AllowAnyMethod();
         });
 });
 builder.Services.AddControllers();

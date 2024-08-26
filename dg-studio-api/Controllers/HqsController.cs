@@ -17,31 +17,21 @@ namespace dg_studio_api.Controllers
 
         [HttpPost]
         [Route("add")]
-        public async Task<IActionResult> AddHq(string nome, IFormFile capaFile, IFormFile bannerFile, string autor, string descricao, string generos)
+        public async Task<IActionResult> AddHq(Hqs hq)
         {
-            if (string.IsNullOrEmpty(nome) || capaFile == null || bannerFile == null || string.IsNullOrEmpty(autor))
+            /*if (string.IsNullOrEmpty(nome) || capaFile == null || bannerFile == null || string.IsNullOrEmpty(autor))
             {
                 return BadRequest("Invalid input.");
             }
 
             var capaBase64 = await ConvertToBase64(capaFile);
-            var bannerBase64 = await ConvertToBase64(bannerFile);
-
-            var hq = new Hqs
-            {
-                nome = nome,
-                capa = capaBase64,
-                banner = bannerBase64,
-                autor = autor,
-                descricao = descricao,
-                generos = generos
-            };
+            var bannerBase64 = await ConvertToBase64(bannerFile);*/
 
             await _hqsRepository.AddHqAsync(hq);
 
             return Ok(new { Message = "HQ added successfully!" });
         }
-
+        /*
         private async Task<string> ConvertToBase64(IFormFile file)
         {
             using (var memoryStream = new MemoryStream())
@@ -50,7 +40,7 @@ namespace dg_studio_api.Controllers
                 var imageBytes = memoryStream.ToArray();
                 return Convert.ToBase64String(imageBytes);
             }
-        }
+        }*/
 
         [HttpGet]
         [Route("ListarHqs")]

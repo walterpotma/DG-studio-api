@@ -35,5 +35,12 @@ namespace dg_studio_api.Infraestrutura
         {
             return await _context.Usuarios.FirstOrDefaultAsync(x => x.email == email && x.senha == senha);
         }
+
+        public async Task<Usuarios> BuscarPorTokenJWT(string token)
+        {
+            var email = TokenService.ReadJWT(token);
+            var busca = await _context.Usuarios.FirstOrDefaultAsync(x => x.email == email);
+            return busca;
+        }
     }
 }

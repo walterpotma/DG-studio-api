@@ -24,5 +24,7 @@ namespace dg_studio_api.Model
         public string descricao { get; set; }
 
         public string generos { get; set; }
+
+        public string? status { get; set; }
     }
 }

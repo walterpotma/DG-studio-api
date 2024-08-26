@@ -27,5 +27,18 @@ namespace dg_studio_api.Controllers
             }
             return Ok(cache);
         }
+
+
+        [HttpGet]
+        [Route("ListarToken/{type}")]
+        public async Task<IActionResult> GetCacheToken(int userId, string type)
+        {
+            var cache = await _cacheRepository.GetCacheToken(userId, type);
+            if (cache == null)
+            {
+                return NotFound();
+            }
+            return Ok(cache);
+        }
     }
 }

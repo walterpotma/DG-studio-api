@@ -37,5 +37,10 @@ namespace dg_studio_api.Infraestrutura
         {
             return await _context.Cache.FindAsync(id);
         }
+
+        public async Task<Cache> GetCacheToken(int userId,string type)
+        {
+            return await _context.Cache.FirstOrDefaultAsync(x => x.type == type && x.userid == userId);
+        }
     }
 }

@@ -4,5 +4,6 @@
     {
         Task AddTokenAsync(int userId, string type, string valor);
         Task<Cache> GetCacheById(int id);
+        Task<Cache> GetCacheToken(int userId, string type);
     }
 }
