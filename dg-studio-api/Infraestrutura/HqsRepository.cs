@@ -19,5 +19,10 @@ namespace dg_studio_api.Infraestrutura
         {
             return _context.Hqs.ToList();
         }
+
+        public async Task<Hqs> GetHqById(int id)
+        {
+            return await _context.Hqs.FindAsync(id);
+        }
     }
 }

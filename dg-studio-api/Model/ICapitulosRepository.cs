@@ -5,5 +5,6 @@
         Task AddCapituloAsync(Capitulos cap);
         Task<Capitulos> GetCapituloByIdAsync(int id);
         List<Capitulos> Get();
+        Task<Capitulos> ListarCapitulosHq(string hq);
     }
 }

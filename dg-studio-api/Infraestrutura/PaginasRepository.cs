@@ -1,4 +1,5 @@
 ﻿using dg_studio_api.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace dg_studio_api.Infraestrutura
 {
@@ -17,9 +18,14 @@ namespace dg_studio_api.Infraestrutura
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Paginas> GetPaginaByIdAsync(int id)
+        public async Task<Paginas> GetPaginaByIdAsync(int capitulo_id)
         {
-            return await _context.Paginas.FindAsync(id);
+            return await _context.Paginas.FirstOrDefaultAsync(x => x.capitulo_id == capitulo_id);
+        }
+
+        public List<Paginas> Get()
+        {
+            return _context.Paginas.ToList();
         }
     }
 

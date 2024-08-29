@@ -17,8 +17,9 @@ namespace dg_studio_api.Controllers
 
         [HttpPost]
         [Route("Add")]
-        public async Task<IActionResult> AddPagina( int capituloId, int numero, IFormFile imagens)
+        public async Task<IActionResult> AddPagina( Paginas page)
         {
+            /*
             if (imagens == null || imagens.Length == 0)
             {
                 return BadRequest("Nenhuma imagem fornecida.");
@@ -32,14 +33,14 @@ namespace dg_studio_api.Controllers
                 capitulo_id = capituloId,
                 numero = numero,
                 imagem = base64
-            };
+            };*/
 
-            await _paginaRepository.AddPaginaAsync(pagina);
+            await _paginaRepository.AddPaginaAsync(page);
 
-            return CreatedAtAction(nameof(GetPaginaById), new { id = pagina.id }, pagina);
+            return Ok(new { Message = "Pagina added successfully!" });
         }
 
-        private async Task<string> ConvertToBase64(IFormFile file)
+        /*private async Task<string> ConvertToBase64(IFormFile file)
         {
             using (var memoryStream = new MemoryStream())
             {
@@ -47,18 +48,26 @@ namespace dg_studio_api.Controllers
                 var imageBytes = memoryStream.ToArray();
                 return Convert.ToBase64String(imageBytes);
             }
-        }
+        }*/
 
         [HttpGet]
-        [Route("ListarPorId/{id}")]
-        public async Task<IActionResult> GetPaginaById(int id)
+        [Route("ListarPorId/{capitulo_id}")]
+        public async Task<IActionResult> GetPaginaById(int capitulo_id)
         {
-            var pagina = await _paginaRepository.GetPaginaByIdAsync(id);
+            var pagina = await _paginaRepository.GetPaginaByIdAsync(capitulo_id);
             if (pagina == null)
             {
                 return NotFound();
             }
             return Ok(pagina);
+        }
+
+        [HttpGet]
+        [Route("ListarPaginas")]
+        public IActionResult ListarPaginas()
+        {
+            var paginass = _paginaRepository.Get();
+            return Ok(paginass);
         }
     }
 }

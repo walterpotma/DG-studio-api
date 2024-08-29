@@ -49,5 +49,17 @@ namespace dg_studio_api.Controllers
             var usuarioss = _hqsRepository.Get();
             return Ok(usuarioss);
         }
+
+        [HttpGet]
+        [Route("ListarPorId/{id}")]
+        public async Task<IActionResult> GetHqById(int id)
+        {
+            var cache = await _hqsRepository.GetHqById(id);
+            if (cache == null)
+            {
+                return NotFound();
+            }
+            return Ok(cache);
+        }
     }
 }

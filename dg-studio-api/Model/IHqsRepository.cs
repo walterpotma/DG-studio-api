@@ -4,5 +4,6 @@
     {
         Task AddHqAsync(Hqs hq);
         List<Hqs> Get();
+        Task<Hqs> GetHqById(int id);
     }
 }

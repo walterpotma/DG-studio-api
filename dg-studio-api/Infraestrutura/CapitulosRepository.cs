@@ -1,4 +1,5 @@
 ﻿using dg_studio_api.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace dg_studio_api.Infraestrutura
 {
@@ -24,6 +25,14 @@ namespace dg_studio_api.Infraestrutura
         public List<Capitulos> Get()
         {
             return _context.Capitulos.ToList();
+        }
+
+        public async Task<Capitulos> ListarCapitulosHq(string hq)
+        {
+            return await _context.Capitulos
+                .Where(x => x.hq == hq)
+                .OrderByDescending(x => x.id) // Ajuste 'Id' para o campo que faz sentido para determinar o último
+                .FirstOrDefaultAsync();
         }
     }
 }

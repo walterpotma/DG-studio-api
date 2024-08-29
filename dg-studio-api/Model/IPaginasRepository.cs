@@ -3,6 +3,7 @@
     public interface IPaginasRepository
     {
         Task AddPaginaAsync(Paginas pagina);
-        Task<Paginas> GetPaginaByIdAsync(int id);
+        Task<Paginas> GetPaginaByIdAsync(int capitulo_id);
+        List<Paginas> Get();
     }
 }

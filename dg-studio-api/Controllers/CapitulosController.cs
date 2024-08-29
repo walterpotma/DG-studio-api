@@ -42,10 +42,22 @@ namespace dg_studio_api.Controllers
 
         [HttpGet]
         [Route("ListarCapitulos")]
-        public IActionResult ListarUsuarios()
+        public IActionResult ListarCapitulos()
         {
-            var usuarioss = _capituloRepository.Get();
-            return Ok(usuarioss);
+            var capítuloss = _capituloRepository.Get();
+            return Ok(capítuloss);
+        }
+
+        [HttpGet]
+        [Route("ListarCapHq/{hq}")]
+        public async Task<IActionResult> GetCacheToken(string hq)
+        {
+            var cap = await _capituloRepository.ListarCapitulosHq(hq);
+            if (cap == null)
+            {
+                return NotFound();
+            }
+            return Ok(cap);
         }
     }
 
