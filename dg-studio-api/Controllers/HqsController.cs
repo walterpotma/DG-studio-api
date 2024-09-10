@@ -54,12 +54,77 @@ namespace dg_studio_api.Controllers
         [Route("ListarPorId/{id}")]
         public async Task<IActionResult> GetHqById(int id)
         {
-            var cache = await _hqsRepository.GetHqById(id);
-            if (cache == null)
+            var hq = await _hqsRepository.GetHqById(id);
+            if (hq == null)
             {
                 return NotFound();
             }
-            return Ok(cache);
+            return Ok(hq);
+        }
+
+        [HttpGet]
+        [Route("ListarPorNome/{nome}")]
+        public async Task<IActionResult> GetHqByName(string nome)
+        {
+            var hq = await _hqsRepository.GetHqByName(nome);
+            if (hq == null)
+            {
+                return NotFound();
+            }
+            return Ok(hq);
+        }
+
+        [HttpGet]
+        [Route("ListarFinalizadas")]
+        public async Task<IActionResult> GetHqFinalizadas()
+        {
+            var hq = await _hqsRepository.GetHqFinalizada("Finalizada");
+            if (hq == null)
+            {
+                return NotFound();
+            }
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            // Teste de Rebase de um commit do github
+            return Ok(hq);
+        }
+
+        [HttpGet]
+        [Route("ListarAndamentos")]
+        public async Task<IActionResult> GetHqAndamento()
+        {
+            var hq = await _hqsRepository.GetHqAndamento("Andamento");
+            if (hq == null)
+            {
+                return NotFound();
+            }
+            return Ok(hq);
         }
     }
 }

@@ -4,7 +4,8 @@
     {
         Task AddCapituloAsync(Capitulos cap);
         Task<Capitulos> GetCapituloByIdAsync(int id);
-        List<Capitulos> Get();
+        Task<List<Capitulos>> GetUltimosCaps();
         Task<Capitulos> ListarCapitulosHq(string hq);
+        Task<List<Capitulos>> ListarTodosCapitulosHq(string hq);
     }
 }

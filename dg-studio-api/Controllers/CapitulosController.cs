@@ -41,22 +41,41 @@ namespace dg_studio_api.Controllers
         }
 
         [HttpGet]
-        [Route("ListarCapitulos")]
-        public IActionResult ListarCapitulos()
-        {
-            var capítuloss = _capituloRepository.Get();
-            return Ok(capítuloss);
-        }
-
-        [HttpGet]
-        [Route("ListarCapHq/{hq}")]
-        public async Task<IActionResult> GetCacheToken(string hq)
+        [Route("ListarUltimoCapHq/{hq}")]
+        public async Task<IActionResult> GetHqUltimoCap(string hq)
         {
             var cap = await _capituloRepository.ListarCapitulosHq(hq);
             if (cap == null)
             {
                 return NotFound();
             }
+            return Ok(cap);
+        }
+
+        [HttpGet]
+        [Route("ListarUltimosCapHq")]
+        public async Task<IActionResult> GetLastnewCaps()
+        {
+            var cap = await _capituloRepository.GetUltimosCaps();
+            if (cap == null)
+            {
+                return NotFound();
+            }
+            return Ok(cap);
+        }
+
+
+        [HttpGet]
+        [Route("ListarTodosCapHq/{hq}")]
+        public async Task<IActionResult> GetAllCapsHq(string hq)
+        {
+            var cap = await _capituloRepository.ListarTodosCapitulosHq(hq);
+
+            if (cap == null || !cap.Any())
+            {
+                return NotFound("Nenhum capítulo encontrado para essa HQ.");
+            }
+
             return Ok(cap);
         }
     }

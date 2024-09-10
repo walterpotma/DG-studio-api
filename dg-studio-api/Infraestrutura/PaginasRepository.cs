@@ -18,9 +18,9 @@ namespace dg_studio_api.Infraestrutura
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Paginas> GetPaginaByIdAsync(int capitulo_id)
+        public async Task<List<Paginas>> GetPaginaByIdAsync(int capitulo_id)
         {
-            return await _context.Paginas.FirstOrDefaultAsync(x => x.capitulo_id == capitulo_id);
+            return await _context.Paginas.Where(x => x.capitulo_id == capitulo_id).ToListAsync();
         }
 
         public List<Paginas> Get()

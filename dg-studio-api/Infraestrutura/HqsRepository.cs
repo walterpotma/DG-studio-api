@@ -1,4 +1,5 @@
 ﻿using dg_studio_api.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace dg_studio_api.Infraestrutura
 {
@@ -23,6 +24,20 @@ namespace dg_studio_api.Infraestrutura
         public async Task<Hqs> GetHqById(int id)
         {
             return await _context.Hqs.FindAsync(id);
+        }
+
+        public async Task<Hqs> GetHqByName(string nome)
+        {
+            return await _context.Hqs.FirstOrDefaultAsync(x => x.nome == nome);
+        }
+
+        public async Task<List<Hqs>> GetHqFinalizada(string status)
+        {
+            return await _context.Hqs.Where(x => x.status == status).ToListAsync();
+        }
+        public async Task<List<Hqs>> GetHqAndamento(string status)
+        {
+            return await _context.Hqs.Where(x => x.status == status).ToListAsync();
         }
     }
 }

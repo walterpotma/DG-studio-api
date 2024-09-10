@@ -22,17 +22,28 @@ namespace dg_studio_api.Infraestrutura
             return await _context.Capitulos.FindAsync(id);
         }
 
-        public List<Capitulos> Get()
+        public async Task<List<Capitulos>> GetUltimosCaps()
         {
-            return _context.Capitulos.ToList();
+            return await _context.Capitulos
+                .OrderByDescending(x => x.id)
+                .ToListAsync();
         }
 
         public async Task<Capitulos> ListarCapitulosHq(string hq)
         {
             return await _context.Capitulos
                 .Where(x => x.hq == hq)
-                .OrderByDescending(x => x.id) // Ajuste 'Id' para o campo que faz sentido para determinar o último
+                .OrderByDescending(x => x.id) // Ajuste 'Id' para o campo que faz sentido para determinar o último 
                 .FirstOrDefaultAsync();
         }
+
+
+        public async Task<List<Capitulos>> ListarTodosCapitulosHq(string hq)
+        {
+            return await _context.Capitulos
+                .Where(x => x.hq == hq)
+                .ToListAsync(); // Usa ToListAsync para converter em uma lista e aguardar o resultado
+        }
+
     }
 }
